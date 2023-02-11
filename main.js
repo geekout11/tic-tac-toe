@@ -42,7 +42,7 @@ function updateCell(cell, index) {
     cell.textContent = currentPlayer
 }
 
-function changePlayer(){
+function changePlayer() {
     currentPlayer = (currentPlayer == "X") ? "O" : "X";
     statusText.textContent = `${currentPlayer}'s turn`;
 }
@@ -66,8 +66,8 @@ function checkWinner() {
         }
     }
 
-    if(roundWon) {
-        statusText.textContent= `${currentPlayer} wis`
+    if (roundWon) {
+        statusText.textContent = `${currentPlayer} wis`
         running = false;
     } else if (!options.includes('')) {
         statusText.textContent = `Draw`
@@ -78,5 +78,9 @@ function checkWinner() {
 }
 
 function restartGame() {
-
+    currentPlayer = 'X'
+    options = ['', '', '', '', '', '', '', '', '']
+    statusText.textContent = `${currentPlayer}'s turn`
+    cells.forEach(cell => cell.textContent = '')
+    running = true
 }
