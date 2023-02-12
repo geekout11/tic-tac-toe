@@ -30,7 +30,14 @@ function initializeGame() {
 }
 
 function turnTakingLogic(square) {
-    turn(square.target.id, huPlayer)
+
+    if (typeof origBoard[square.target.id] == 'number') {
+        turn(square.target.id, huPlayer)
+        if (!checkTie()) {
+            turn(bestSpot(), aiPlayer)
+        }
+    }
+
 }
 
 function turn(squareId, player) {
@@ -61,11 +68,41 @@ function checkWin(board, player) {
 function gameOver(gameWon) {
     for (let index of winConditions[gameWon.index]) {
         document.getElementById(index).style.backgroundColor =
-            gameWon.player === huPlayer ? "blue" : "red";
+            gameWon.player === huPlayer ? "green" : "red";
     }
     for (let i = 0; i < cells.length; i++) {
         cells[i].removeEventListener('click', turnTakingLogic, false);
     }
+
+    declareWinner(gameWon.player == huPlayer ? 'You win' : 'You lose')
+}
+
+function bestSpot() {
+    return emptySquare()[0]
+}
+
+function emptySquare() {
+    return origBoard.filter(s => typeof s == 'number')
+}
+
+function checkTie() {
+
+    if (emptySquare().length == 0) {
+        for (let i = 0; i < cells.length; i++) {
+            cells[i].style.backgroundColor = 'blue'
+            cells[i].removeEventListener('click', turnTakingLogic, false)
+        }
+
+        declareWinner("Its a Draw")
+        return true
+    }
+
+    return false
+}
+
+function declareWinner(who) {
+    document.querySelector('.endgame').style.display = 'block'
+    document.querySelector('.endgame .text').innerText = who
 }
 // function turn(squareId, player) {
 //     origBoard[squareId] = player
