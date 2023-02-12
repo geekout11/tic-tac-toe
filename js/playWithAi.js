@@ -64,7 +64,7 @@ function gameOver(gameWon) {
             gameWon.player === huPlayer ? "blue" : "red";
     }
     for (let i = 0; i < cells.length; i++) {
-        cells[i].removeEventListener('click', turn, false);
+        cells[i].removeEventListener('click', turnTakingLogic, false);
     }
 }
 // function turn(squareId, player) {
