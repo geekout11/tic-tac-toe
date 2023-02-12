@@ -47,6 +47,11 @@ function changePlayer() {
     statusText.textContent = `${currentPlayer}'s turn`;
 }
 
+function declareWinner(who) {
+    document.querySelector('.endgame').style.display = 'block'
+    document.querySelector('.endgame .text').innerText = who
+}
+
 function checkWinner() {
     let roundWon = false
 
@@ -67,10 +72,10 @@ function checkWinner() {
     }
 
     if (roundWon) {
-        statusText.textContent = `${currentPlayer} wis`
+        declareWinner(`${currentPlayer} wins`)
         running = false;
     } else if (!options.includes('')) {
-        statusText.textContent = `Draw`
+        declareWinner(`Draw`)
         running = false
     } else {
         changePlayer()
@@ -78,6 +83,7 @@ function checkWinner() {
 }
 
 function restartGame() {
+    document.querySelector('.endgame').style.display = 'none'
     currentPlayer = 'X'
     options = ['', '', '', '', '', '', '', '', '']
     statusText.textContent = `${currentPlayer}'s turn`
