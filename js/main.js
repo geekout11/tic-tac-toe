@@ -29,6 +29,28 @@ function initializeGame() {
     }
 }
 
-function turnTakingLogic() {
+function turnTakingLogic(square) {
+    turn(square.target.id, huPlayer)
+}
+
+function turn(squareId, player) {
+    let gameWon = checkWin(origBoard, player)
+
+    origBoard[squareId] = player
+    document.getElementById(squareId).innerText = player
+
+    if(gameWon) {
+        gameOver(gameWon)
+    }
+}
+
+function checkWin(board, player) {
 
 }
+
+// function turn(squareId, player) {
+//     origBoard[squareId] = player
+//     const square = document.getElementById(squareId)
+//     square.innerText = player
+//     const attributeValue = square.getAttribute("cellIndex");
+// }
