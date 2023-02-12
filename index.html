@@ -12,28 +12,27 @@
 
 <body>
 
-    <div class="gameContainer">
-        <h1>Tic Tac Toe</h1>
-        <table class="cellContainer">
-            <tr>
-                <td cellIndex="0" class="cell"></td>
-                <td cellIndex="1" class="cell"></td>
-                <td cellIndex="2" class="cell"></td>
-            </tr>
-            <tr>
-                <td cellIndex="3" class="cell"></td>
-                <td cellIndex="4" class="cell"></td>
-                <td cellIndex="5" class="cell"></td>
-            </tr>
-            <tr>
-                <td cellIndex="6" class="cell"></td>
-                <td cellIndex="7" class="cell"></td>
-                <td cellIndex="8" class="cell"></td>
-            </tr>
-        </table>
-        <h2 class="statusText"></h2>
-        <button class="restartBtn">Restart</button>
+    <table>
+        <tr>
+            <td class="cell" id="0"></td>
+            <td class="cell" id="1"></td>
+            <td class="cell" id="2"></td>
+        </tr>
+        <tr>
+            <td class="cell" id="3"></td>
+            <td class="cell" id="4"></td>
+            <td class="cell" id="5"></td>
+        </tr>
+        <tr>
+            <td class="cell" id="6"></td>
+            <td class="cell" id="7"></td>
+            <td class="cell" id="8"></td>
+        </tr>
+    </table>
+    <div class="endgame">
+        <div class="text"></div>
     </div>
+    <button onClick="startGame()">Replay</button>
 
 </body>
 
