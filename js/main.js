@@ -1,6 +1,6 @@
-const cells = document.querySelectorAll('.cell')
-const statusText = document.querySelector('.statusText')
-const restartBtn = document.querySelector('.restartBtn')
+let origBoard
+const huPlayer = 'O'
+const aiPlayer = 'X'
 
 const winConditions = [
     [0, 1, 2],
@@ -13,74 +13,22 @@ const winConditions = [
     [2, 4, 6]
 ]
 
-let options = ['', '', '', '', '', '', '', '', '']
-let currentPlayer = 'X'
-let running = false
+const cells = document.querySelectorAll('.cell')
 
 initializeGame()
 
 function initializeGame() {
-    cells.forEach((cell) => cell.addEventListener('click', cellClicked))
-    restartBtn.addEventListener('click', restartGame)
-    statusText.textContent = `${currentPlayer}'s turn`
-    running = true
-}
+    document.querySelector('.endgame').style.display = 'none'
+    origBoard = Array.from(Array(9).keys())
+    // console.log(origBoard)
 
-function cellClicked() {
-    const cellIndex = this.getAttribute("cellIndex");
-
-    if (options[cellIndex] != "" || !running) {
-        return;
-    }
-
-    updateCell(this, cellIndex);
-    checkWinner();
-}
-
-function updateCell(cell, index) {
-    options[index] = currentPlayer
-    cell.textContent = currentPlayer
-}
-
-function changePlayer() {
-    currentPlayer = (currentPlayer == "X") ? "O" : "X";
-    statusText.textContent = `${currentPlayer}'s turn`;
-}
-
-function checkWinner() {
-    let roundWon = false
-
-    for (let i = 0; i < winConditions.length; i++) {
-        const condition = winConditions[i];
-        const cellA = options[condition[0]]
-        const cellB = options[condition[1]]
-        const cellC = options[condition[2]]
-
-        if (cellA == '' || cellB == '' || cellC == '') {
-            continue
-        }
-
-        if (cellA == cellB && cellB == cellC) {
-            roundWon = true
-            break;
-        }
-    }
-
-    if (roundWon) {
-        statusText.textContent = `${currentPlayer} wis`
-        running = false;
-    } else if (!options.includes('')) {
-        statusText.textContent = `Draw`
-        running = false
-    } else {
-        changePlayer()
+    for (let i = 0; i < cells.length; i++) {
+        cells[i].innerText = ''
+        cells[i].style.removeProperty('background-color')
+        cells[i].addEventListener('click', turnTakingLogic, false)
     }
 }
 
-function restartGame() {
-    currentPlayer = 'X'
-    options = ['', '', '', '', '', '', '', '', '']
-    statusText.textContent = `${currentPlayer}'s turn`
-    cells.forEach(cell => cell.textContent = '')
-    running = true
+function turnTakingLogic() {
+
 }
