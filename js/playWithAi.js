@@ -35,10 +35,10 @@ function turnTakingLogic(square) {
 
 function turn(squareId, player) {
 
-    let gameWon = checkWin(origBoard, player)
-
     origBoard[squareId] = player
     document.getElementById(squareId).innerText = player
+
+    let gameWon = checkWin(origBoard, player)
 
     if (gameWon) {
         gameOver(gameWon)
