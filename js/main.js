@@ -34,20 +34,39 @@ function turnTakingLogic(square) {
 }
 
 function turn(squareId, player) {
+
     let gameWon = checkWin(origBoard, player)
 
     origBoard[squareId] = player
     document.getElementById(squareId).innerText = player
 
-    if(gameWon) {
+    if (gameWon) {
         gameOver(gameWon)
     }
 }
 
 function checkWin(board, player) {
+    let plays = board.reduce((a, e, i) => (e === player) ? a.concat(i) : a, [])
+    let gameWon = null
+    for (let [index, win] of winConditions.entries()) {
+        if (win.every(elem => plays.indexOf(elem) > -1)) {
+            gameWon = { index: index, player: player }
 
+            break
+        }
+    }
+    return gameWon
 }
 
+function gameOver(gameWon) {
+    for (let index of winConditions[gameWon.index]) {
+        document.getElementById(index).style.backgroundColor =
+            gameWon.player === huPlayer ? "blue" : "red";
+    }
+    for (let i = 0; i < cells.length; i++) {
+        cells[i].removeEventListener('click', turn, false);
+    }
+}
 // function turn(squareId, player) {
 //     origBoard[squareId] = player
 //     const square = document.getElementById(squareId)
