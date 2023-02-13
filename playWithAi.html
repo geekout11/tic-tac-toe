@@ -7,40 +7,47 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <script defer src="js/playWithAi.js"></script>
     <link rel="stylesheet" href="css/style.css">
-    <title>Tic Tac Toe</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Stalinist+One&display=swap" rel="stylesheet">
+    <title>Tic Tac Toe | AI</title>
 </head>
 
 <body>
-    <a href="/index.html">Play with second person</a>
-    <h1>Tic Tac Toe</h1>
-    <table>
-        <tr>
-            <td class="cell" id="0"></td>
-            <td class="cell" id="1"></td>
-            <td class="cell" id="2"></td>
-        </tr>
-        <tr>
-            <td class="cell" id="3"></td>
-            <td class="cell" id="4"></td>
-            <td class="cell" id="5"></td>
-        </tr>
-        <tr>
-            <td class="cell" id="6"></td>
-            <td class="cell" id="7"></td>
-            <td class="cell" id="8"></td>
-        </tr>
-    </table>
+    <div class="game-container">
 
-    <div class="endgame">
-        <div class="text"></div>
+        <a href="/index.html">Play with <span class="highlight">second person</span></a>
+        <h1>Tic Tac Toe</h1>
+        <table>
+            <tr>
+                <td class="cell" id="0"></td>
+                <td class="cell" id="1"></td>
+                <td class="cell" id="2"></td>
+            </tr>
+            <tr>
+                <td class="cell" id="3"></td>
+                <td class="cell" id="4"></td>
+                <td class="cell" id="5"></td>
+            </tr>
+            <tr>
+                <td class="cell" id="6"></td>
+                <td class="cell" id="7"></td>
+                <td class="cell" id="8"></td>
+            </tr>
+        </table>
+
+        <div class="endgame">
+            <div class="text"></div>
+        </div>
+
+        <button onClick="initializeGame()">Restart</button>
+
+        <div class="difficulty-container">
+            <button id="easy">Easy</button>
+            <button id="hard">Hard</button>
+        </div>
     </div>
-
-    <div class="difficulty-container">
-        <button id="easy">Easy</button>
-        <button id="hard">Hard</button>
-    </div>
-
-    <button onClick="initializeGame()">Restart</button>
 
 </body>
 
