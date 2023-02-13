@@ -1,6 +1,7 @@
 let origBoard
 const humanPlayer = 'O'
 const aiPlayer = 'X'
+let difficulty = "easy"
 
 const cells = document.querySelectorAll('.cell')
 
@@ -30,25 +31,23 @@ function initializeGame() {
 
 function turnTakingLogic(square) {
 
-    if (typeof origBoard[square.target.id] == 'number') {
-        turn(square.target.id, humanPlayer)
-        if (!checkTie()) {
-            turn(bestSpot(), aiPlayer)
-        }
+    if (typeof origBoard[square.target.id] === 'number') {
+        turn(square.target.id, humanPlayer);
+        if (!checkWin(origBoard, humanPlayer) && !checkTie())
+            turn(bestSpot(), aiPlayer);
     }
 
 }
 
+
 function turn(squareId, player) {
-
     origBoard[squareId] = player
-    document.getElementById(squareId).innerText = player
-
+    document.getElementById(squareId).innerHTML = player
     let gameWon = checkWin(origBoard, player)
-
     if (gameWon) {
         gameOver(gameWon)
     }
+    checkTie();
 }
 
 function checkWin(board, player) {
@@ -63,6 +62,7 @@ function checkWin(board, player) {
     }
     return gameWon
 }
+
 
 function gameOver(gameWon) {
     for (let index of winConditions[gameWon.index]) {
@@ -104,8 +104,25 @@ function declareWinner(who) {
     document.querySelector('.endgame .text').innerText = who
 }
 
+
+window.onload = function() {
+    document.getElementById("easy").classList.add("selected");
+}
+
+document.getElementById("easy").addEventListener("click", function () {
+    difficulty = "easy";
+    document.getElementById("easy").classList.add("selected");
+    document.getElementById("hard").classList.remove("selected");
+})
+
+document.getElementById("hard").addEventListener("click", function () {
+    difficulty = "hard";
+    document.getElementById("hard").classList.add("selected");
+    document.getElementById("easy").classList.remove("selected");
+})
+
 function minimaxAlgorithm(newBoard, player) {
-    let availableSpots = emptySquare(newBoard);
+    let availableSpots = emptySquare(newBoard)
 
     if (checkWin(newBoard, humanPlayer)) {
         return { score: -10 }
@@ -121,10 +138,15 @@ function minimaxAlgorithm(newBoard, player) {
         move.index = newBoard[availableSpots[i]]
         newBoard[availableSpots[i]] = player
 
-        if (player === aiPlayer)
-            move.score = minimaxAlgorithm(newBoard, humanPlayer).score
-        else
+        if (player === aiPlayer) {
+            if (difficulty === "easy") {
+                move.score = Math.floor(Math.random() * 10);
+            } else {
+                move.score = minimaxAlgorithm(newBoard, humanPlayer).score
+            }
+        } else {
             move.score = minimaxAlgorithm(newBoard, aiPlayer).score
+        }
         newBoard[availableSpots[i]] = move.index
         if ((player === aiPlayer && move.score === 10) || (player === humanPlayer && move.score === -10))
             return move
@@ -154,3 +176,4 @@ function minimaxAlgorithm(newBoard, player) {
 
     return moves[bestMove]
 }
+
