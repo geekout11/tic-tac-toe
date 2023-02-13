@@ -24,6 +24,14 @@ a:hover {
     color: #119ada;
 }
 
+.highlight {
+    color: white;
+}
+
+.highlight:hover {
+    color: #119ada;
+}
+
 h1 {
     text-transform: uppercase;
 }
