@@ -31,6 +31,29 @@ button {
     margin: 20px auto;
 }
 
+.difficulty-container {
+    display: flex;
+    justify-content: center;
+    margin-top: 20px;
+}
+
+.difficulty-button {
+    padding: 10px 20px;
+    border-radius: 5px;
+    border: none;
+    background-color: lightgray;
+    margin-right: 10px;
+    cursor: pointer;
+}
+
+.difficulty-button:hover {
+    background-color: gray;
+}
+
+.selected {
+    background-color: lightblue;
+}
+
 .cell {
     width: 75px;
     height: 75px;
