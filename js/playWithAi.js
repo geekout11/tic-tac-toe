@@ -92,7 +92,7 @@ function checkTie() {
             cells[i].removeEventListener('click', turnTakingLogic, false)
         }
 
-        declareWinner("Its a Draw")
+        declareWinner("It's a Draw")
         return true
     }
 
