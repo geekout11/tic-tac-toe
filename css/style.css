@@ -20,16 +20,12 @@ a {
     color: #F2C14E
 }
 
-a:hover {
+a:hover, a:hover span {
     color: #119ada;
 }
 
-.highlight {
-    color: white;
-}
-
-.highlight:hover {
-    color: #119ada;
+span {
+    color: white
 }
 
 h1 {
